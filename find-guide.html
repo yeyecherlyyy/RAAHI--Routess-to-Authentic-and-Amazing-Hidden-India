@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Guides — RAAHI</title>
+  <link rel="stylesheet" href="/src/styles/main.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📍</text></svg>">
+</head>
+<body>
+<div class="page-wrapper">
+  <div class="container">
+    <div class="section-header-row animate-in">
+      <div class="section-header">
+        <p class="label">LOCAL EXPERTS</p>
+        <h1>Find Your Raahi Guide</h1>
+        <p>Verified students and locals who know their city's every secret. Filter by area, language, and rating.</p>
+      </div>
+      <a href="/guide-login.html" class="btn btn-primary">+ Register as Guide</a>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px;" class="animate-in animate-delay-1">
+      <select class="form-input" id="city-filter" style="width:auto;min-width:160px;padding:12px 36px 12px 16px;"><option value="">All Cities</option></select>
+      <select class="form-input" id="gender-filter" style="width:auto;min-width:160px;padding:12px 36px 12px 16px;"><option value="">Any Gender</option><option value="male">Male</option><option value="female">Female</option></select>
+      <select class="form-input" id="lang-filter" style="width:auto;min-width:160px;padding:12px 36px 12px 16px;"><option value="">Any Language</option><option value="hindi">Hindi</option><option value="english">English</option><option value="marathi">Marathi</option><option value="tamil">Tamil</option></select>
+    </div>
+    <div class="grid-2" id="guides-grid"></div>
+  </div>
+</div>
+<script type="module" src="/src/js/pages/findGuide.js"></script>
+</body>
+</html>
