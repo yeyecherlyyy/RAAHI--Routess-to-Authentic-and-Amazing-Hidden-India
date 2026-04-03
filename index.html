@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAAHI — Routes to Authentic & Amazing Hidden India</title>
+  <meta name="description"
+    content="Discover hidden gems across India. Locals submit their secret spots. You explore them on a living map — with guides who grew up there.">
+  <link rel="stylesheet" href="/src/styles/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📍</text></svg>">
+</head>
+
+<body>
+  <div id="app">
+    <!-- HERO -->
+    <section class="hero page-wrapper">
+      <div class="container">
+        <div class="grid-2" style="gap:48px;align-items:center;">
+          <div class="animate-in">
+            <div class="hero-label"><span class="label">HIDDEN INDIA AWAITS</span></div>
+            <h1 class="hero-title">Travel beyond<br><span class="accent">tourist traps.</span><br>Discover real India.
+            </h1>
+            <p class="hero-subtitle">Locals submit their secret spots. You explore them on a living map — with guides
+              who grew up there.</p>
+            <div class="hero-actions">
+              <a href="/explore.html" class="btn btn-primary btn-lg">🗺️ Explore the Map</a>
+              <a href="/submit-gem.html" class="btn btn-outline btn-lg">Submit a Hidden Gem</a>
+              <a href="/find-guide.html" class="btn btn-outline btn-lg">Find a Local Guide</a>
+            </div>
+          </div>
+          <div class="map-container animate-in animate-delay-2" style="height:420px;border-radius:var(--radius-xl);">
+            <div id="hero-map" style="height:100%;width:100%;border-radius:var(--radius-xl);"></div>
+          </div>
+        </div>
+        <div class="hero-stats" style="margin-top:48px;">
+          <div class="hero-stat">
+            <h3>2,400+</h3>
+            <p>Hidden Gems mapped</p>
+          </div>
+          <div class="hero-stat">
+            <h3>380</h3>
+            <p>Verified local guides</p>
+          </div>
+          <div class="hero-stat">
+            <h3>26</h3>
+            <p>States covered</p>
+          </div>
+          <div class="hero-stat">
+            <h3>94%</h3>
+            <p>Traveller satisfaction</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOP RATED GEMS -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header-row animate-in">
+          <div class="section-header">
+            <p class="label">TOP RATED THIS MONTH</p>
+            <h2>Gems the locals love</h2>
+          </div>
+          <a href="/explore.html" class="btn btn-outline">See all on map →</a>
+        </div>
+        <div class="filter-bar animate-in" id="filter-bar"></div>
+        <div class="grid-2" id="top-gems-grid"></div>
+      </div>
+    </section>
+
+    <!-- CUSTOMIZE YOUR ROUTE -->
+    <section class="section" style="background:var(--bg-warm);">
+      <div class="container">
+        <div class="section-header animate-in" style="text-align:center;">
+          <p class="label" style="text-align:center;">PLAN YOUR TRIP</p>
+          <h2 style="margin:0 auto;">Customize your Route</h2>
+          <p style="margin:0 auto;">Pick cities, select gems, choose a guide — build your dream itinerary in minutes.
+          </p>
+        </div>
+        <div class="card animate-in" style="padding:32px;max-width:800px;margin:0 auto;">
+          <div class="form-row" style="margin-bottom:20px;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">FROM CITY</label>
+              <select class="form-input" id="route-from">
+                <option>Delhi</option>
+                <option>Mumbai</option>
+                <option>Jaipur</option>
+                <option>Bangalore</option>
+                <option>Kolkata</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">TO CITY</label>
+              <select class="form-input" id="route-to">
+                <option>Jaipur</option>
+                <option>Varanasi</option>
+                <option>Goa</option>
+                <option>Udaipur</option>
+                <option>Pondicherry</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom:20px;">
+            <label class="form-label">TRIP TYPE</label>
+            <div class="filter-bar" style="margin-bottom:0;">
+              <button class="filter-chip active">🌟 Best of Everything</button>
+              <button class="filter-chip">🍛 Food Trail</button>
+              <button class="filter-chip">🏛️ Heritage Walk</button>
+              <button class="filter-chip">🌿 Nature Retreat</button>
+              <button class="filter-chip">🏔️ Adventure</button>
+            </div>
+          </div>
+          <div class="form-row" style="margin-bottom:20px;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">DATES</label>
+              <input class="form-input" type="date">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">DURATION</label>
+              <select class="form-input">
+                <option>2-3 Days</option>
+                <option>4-5 Days</option>
+                <option>1 Week</option>
+                <option>2 Weeks</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;justify-content:center;">
+            <a href="/explore.html" class="btn btn-primary btn-lg">🗺️ Build My Route</a>
+            <button class="btn btn-outline btn-lg"
+              onclick="document.getElementById('ai-route-modal').style.display='flex'">✨ AI Suggest Route</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header animate-in" style="text-align:center;">
+          <p class="label" style="text-align:center;">HOW IT WORKS</p>
+          <h2 style="margin:0 auto;">Three steps to discover the real India</h2>
+        </div>
+        <div class="grid-3">
+          <div class="card animate-in animate-delay-1" style="padding:32px;text-align:center;">
+            <div style="font-size:2.5rem;margin-bottom:16px;">🔍</div>
+            <h3>Discover</h3>
+            <p class="card-text" style="margin-top:8px;">Browse hidden gems submitted by locals on our interactive map.
+              Filter by city, vibe, or category.</p>
+          </div>
+          <div class="card animate-in animate-delay-2" style="padding:32px;text-align:center;">
+            <div style="font-size:2.5rem;margin-bottom:16px;">🤝</div>
+            <h3>Connect</h3>
+            <p class="card-text" style="margin-top:8px;">Find verified local guides — students, foodies, culture lovers
+              — who know every back street.</p>
+          </div>
+          <div class="card animate-in animate-delay-3" style="padding:32px;text-align:center;">
+            <div style="font-size:2.5rem;margin-bottom:16px;">⭐</div>
+            <h3>Experience</h3>
+            <p class="card-text" style="margin-top:8px;">Build custom itineraries, earn badges, and help others discover
+              India's best kept secrets.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY & TRAVEL BUDDIES -->
+    <section class="section" style="background:var(--bg-warm);">
+      <div class="container">
+        <div class="grid-2" style="gap:40px;">
+          <div class="animate-in">
+            <div class="section-header">
+              <p class="label">COMMUNITY</p>
+              <h2>What travellers are saying</h2>
+            </div>
+            <div id="community-feed"></div>
+          </div>
+          <div class="animate-in animate-delay-1">
+            <div class="section-header">
+              <p class="label">TRAVEL BUDDIES</p>
+              <h2>Find your travel partner</h2>
+            </div>
+            <div id="buddy-list"></div>
+            <a href="/community.html" class="btn btn-outline"
+              style="margin-top:16px;width:100%;justify-content:center;">Join the Community →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" style="text-align:center;padding:80px 0;">
+      <div class="container animate-in">
+        <p class="label" style="text-align:center;">JOIN THE COMMUNITY</p>
+        <h2 style="margin:8px auto 16px;">Ready to find your next hidden gem?</h2>
+        <p style="color:var(--text-secondary);margin:0 auto 32px;max-width:480px;">Join thousands of travelers
+          discovering the real India, one hidden gem at a time.</p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+          <a href="/tourist-login.html" class="btn btn-primary btn-lg">Join as Traveller</a>
+          <a href="/guide-login.html" class="btn btn-outline btn-lg">Become a Guide</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- AI Route Modal -->
+  <div class="modal-overlay" id="ai-route-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>✨ AI Route Suggestion</h3><button onclick="this.closest('.modal-overlay').style.display='none'"
+          style="font-size:1.5rem;cursor:pointer;background:none;border:none;">×</button>
+      </div>
+      <div class="modal-body">
+        <p style="color:var(--text-secondary);margin-bottom:20px;">Tell us what kind of experience you're looking for,
+          and our AI will suggest the perfect route with hidden gems and guides.</p>
+        <textarea class="form-input" id="ai-prompt" rows="3"
+          placeholder="e.g. I want a 3-day food and culture trip in Rajasthan, preferring offbeat places with morning temple visits and evening street food..."></textarea>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:16px;" id="ai-suggest-btn">✨
+          Generate My Route</button>
+        <div id="ai-result" style="margin-top:20px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script type="module" src="/src/js/pages/home.js"></script>
+</body>
+
+</html>
